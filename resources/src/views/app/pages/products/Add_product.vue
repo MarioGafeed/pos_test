@@ -27,34 +27,7 @@
                       <b-form-invalid-feedback id="Name-feedback">{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
-                </b-col>
-
-                <!-- Barcode Symbology  -->
-                <b-col md="6" class="mb-2">
-                  <validation-provider name="Barcode Symbology" :rules="{ required: true}">
-                    <b-form-group
-                      slot-scope="{ valid, errors }"
-                      :label="$t('BarcodeSymbology') + ' ' + '*'"
-                    >
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="product.Type_barcode"
-                        :reduce="label => label.value"
-                        :placeholder="$t('Choose_Symbology')"
-                        :options="
-                            [
-                              {label: 'Code 128', value: 'CODE128'},
-                              {label: 'Code 39', value: 'CODE39'},
-                              {label: 'EAN8', value: 'EAN8'},
-                              {label: 'EAN13', value: 'EAN13'},
-                              {label: 'UPC', value: 'UPC'},
-                            ]"
-                      ></v-select>
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
+                </b-col>                               
 
                 <!-- Code Product"-->
                 <b-col md="6" class="mb-2">
@@ -91,128 +64,8 @@
                   </validation-provider>
                 </b-col>
 
-                <!-- Category -->
-                <b-col md="6" class="mb-2">
-                  <validation-provider name="category" :rules="{ required: true}">
-                    <b-form-group
-                      slot-scope="{ valid, errors }"
-                      :label="$t('Categorie') + ' ' + '*'"
-                    >
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        :reduce="label => label.value"
-                        :placeholder="$t('Choose_Category')"
-                        v-model="product.category_id"
-                        :options="categories.map(categories => ({label: categories.name, value: categories.id}))"
-                      />
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-                <!-- Brand  -->
-                <b-col md="6" class="mb-2">
-                  <b-form-group :label="$t('Brand')">
-                    <v-select
-                      :placeholder="$t('Choose_Brand')"
-                      :reduce="label => label.value"
-                      v-model="product.brand_id"
-                      :options="brands.map(brands => ({label: brands.name, value: brands.id}))"
-                    />
-                  </b-form-group>
-                </b-col>
-
-                <!-- Order Tax -->
-                <b-col md="6" class="mb-2">
-                  <validation-provider
-                    name="Order Tax"
-                    :rules="{regex: /^\d*\.?\d*$/}"
-                    v-slot="validationContext"
-                  >
-                    <b-form-group :label="$t('OrderTax')">
-                      <div class="input-group">
-                        <input
-                          :state="getValidationState(validationContext)"
-                          aria-describedby="OrderTax-feedback"
-                          v-model.number="product.TaxNet"
-                          type="text"
-                          class="form-control"
-                        >
-                        <div class="input-group-append">
-                          <span class="input-group-text">%</span>
-                        </div>
-                      </div>
-                      <b-form-invalid-feedback
-                        id="OrderTax-feedback"
-                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-                <!-- Tax Method -->
-                <b-col lg="6" md="6" sm="12" class="mb-2">
-                  <validation-provider name="Tax Method" :rules="{ required: true}">
-                    <b-form-group
-                      slot-scope="{ valid, errors }"
-                      :label="$t('TaxMethod') + ' ' + '*'"
-                    >
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="product.tax_method"
-                        :reduce="label => label.value"
-                        :placeholder="$t('Choose_Method')"
-                        :options="
-                           [
-                            {label: 'Exclusive', value: '1'},
-                            {label: 'Inclusive', value: '2'}
-                           ]"
-                      ></v-select>
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-                <b-col md="12" class="mb-2">
-                  <b-form-group :label="$t('Description')">
-                    <textarea
-                      rows="4"
-                      class="form-control"
-                      :placeholder="$t('Afewwords')"
-                      v-model="product.note"
-                    ></textarea>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </b-card>
-
-            <b-card class="mt-3">
-              <b-row>
-                <!-- Type  -->
-                <b-col md="6" class="mb-2">
-                  <validation-provider name="Type" :rules="{ required: true}">
-                    <b-form-group slot-scope="{ valid, errors }" :label="$t('type') + ' ' + '*'">
-                      <v-select
-                        :class="{'is-invalid': !!errors.length}"
-                        :state="errors[0] ? false : (valid ? true : null)"
-                        v-model="product.type"
-                        :reduce="label => label.value"
-                        :placeholder="$t('type')"
-                        :options="
-                            [
-                            {label: 'Standard Product', value: 'is_single'},
-                            {label: 'Variable Product', value: 'is_variant'},
-                            {label: 'Service Product', value: 'is_service'}
-                            ]"
-                      ></v-select>
-                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
-                    </b-form-group>
-                  </validation-provider>
-                </b-col>
-
-                <!-- Product Cost -->
-                <b-col md="6" class="mb-2" v-if="product.type == 'is_single'">
+                 <!-- Product Cost -->
+                 <b-col md="6" class="mb-2" v-if="product.type == 'is_single'">
                   <validation-provider
                     name="Product Cost"
                     :rules="{ required: true , regex: /^\d*\.?\d*$/}"
@@ -258,6 +111,38 @@
                       >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
+                </b-col>
+
+                <!-- Category -->
+                <b-col md="6" class="mb-2">
+                  <validation-provider name="category" :rules="{ required: true}">
+                    <b-form-group
+                      slot-scope="{ valid, errors }"
+                      :label="$t('Categorie') + ' ' + '*'"
+                    >
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Category')"
+                        v-model="product.category_id"
+                        :options="categories.map(categories => ({label: categories.name, value: categories.id}))"
+                      />
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+                <!-- Brand  -->
+                <b-col md="6" class="mb-2">
+                  <b-form-group :label="$t('Brand')">
+                    <v-select
+                      :placeholder="$t('Choose_Brand')"
+                      :reduce="label => label.value"
+                      v-model="product.brand_id"
+                      :options="brands.map(brands => ({label: brands.name, value: brands.id}))"
+                    />
+                  </b-form-group>
                 </b-col>
 
                 <!-- Unit Product -->
@@ -341,6 +226,121 @@
                       <b-form-invalid-feedback
                         id="StockAlert-feedback"
                       >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>                                
+
+                <b-col md="12" class="mb-2">
+                  <b-form-group :label="$t('Description')">
+                    <textarea
+                      rows="4"
+                      class="form-control"
+                      :placeholder="$t('Afewwords')"
+                      v-model="product.note"
+                    ></textarea>
+                  </b-form-group>
+                </b-col>
+              </b-row>
+            </b-card>
+
+            <b-card class="mt-3">
+              <b-row>
+                <!-- Type  -->
+                <b-col md="6" class="mb-2">
+                  <validation-provider name="Type" :rules="{ required: true}">
+                    <b-form-group slot-scope="{ valid, errors }" :label="$t('type') + ' ' + '*'">
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="product.type"
+                        :reduce="label => label.value"
+                        :placeholder="$t('type')"
+                        :options="
+                            [
+                            {label: 'Standard Product', value: 'is_single'},
+                            {label: 'Variable Product', value: 'is_variant'},
+                            {label: 'Service Product', value: 'is_service'}
+                            ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+                 <!-- Barcode Symbology  -->
+                 <b-col md="6" class="mb-2">
+                  <validation-provider name="Barcode Symbology" :rules="{ required: true}">
+                    <b-form-group
+                      slot-scope="{ valid, errors }"
+                      :label="$t('BarcodeSymbology') + ' ' + '*'"
+                    >
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="product.Type_barcode"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Symbology')"
+                        :options="
+                            [
+                              {label: 'Code 128', value: 'CODE128'},
+                              {label: 'Code 39', value: 'CODE39'},
+                              {label: 'EAN8', value: 'EAN8'},
+                              {label: 'EAN13', value: 'EAN13'},
+                              {label: 'UPC', value: 'UPC'},
+                            ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>        
+                
+                <!-- Order Tax -->
+                <b-col md="6" class="mb-2">
+                  <validation-provider
+                    name="Order Tax"
+                    :rules="{regex: /^\d*\.?\d*$/}"
+                    v-slot="validationContext"
+                  >
+                    <b-form-group :label="$t('OrderTax')">
+                      <div class="input-group">
+                        <input
+                          :state="getValidationState(validationContext)"
+                          aria-describedby="OrderTax-feedback"
+                          v-model.number="product.TaxNet"
+                          type="text"
+                          class="form-control"
+                        >
+                        <div class="input-group-append">
+                          <span class="input-group-text">%</span>
+                        </div>
+                      </div>
+                      <b-form-invalid-feedback
+                        id="OrderTax-feedback"
+                      >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+                </b-col>
+
+                <!-- Tax Method -->
+                <b-col lg="6" md="6" sm="12" class="mb-2">
+                  <validation-provider name="Tax Method" :rules="{ required: true}">
+                    <b-form-group
+                      slot-scope="{ valid, errors }"
+                      :label="$t('TaxMethod') + ' ' + '*'"
+                    >
+                      <v-select
+                        :class="{'is-invalid': !!errors.length}"
+                        :state="errors[0] ? false : (valid ? true : null)"
+                        v-model="product.tax_method"
+                        :reduce="label => label.value"
+                        :placeholder="$t('Choose_Method')"
+                        :options="
+                           [
+                            {label: 'Exclusive', value: '1'},
+                            {label: 'Inclusive', value: '2'}
+                           ]"
+                      ></v-select>
+                      <b-form-invalid-feedback>{{ errors[0] }}</b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
                 </b-col>
