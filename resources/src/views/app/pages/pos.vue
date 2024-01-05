@@ -288,7 +288,7 @@
                     </b-col>
                   </b-row>
 
-                  <!-- Calcul Grand Total -->
+                  Calcul Grand Total 
                   <div class="footer_panel">
                     <b-row>
                       <b-col md="12">
@@ -297,78 +297,7 @@
                         </div>
                       </b-col>
 
-                      <!-- Order Tax  -->
-                      <b-col lg="4" md="4" sm="12" v-if="currentUserPermissions && currentUserPermissions.includes('edit_tax_discount_shipping_sale')">
-                        <validation-provider
-                          name="Order Tax"
-                          :rules="{ regex: /^\d*\.?\d*$/}"
-                          v-slot="validationContext"
-                        >
-                          <b-form-group :label="$t('Tax')" append="%">
-                            <b-input-group append="%">
-                              <b-form-input
-                                :state="getValidationState(validationContext)"
-                                aria-describedby="OrderTax-feedback"
-                                label="Order Tax"
-                                v-model.number="sale.tax_rate"
-                                @keyup="keyup_OrderTax()"
-                              ></b-form-input>
-                            </b-input-group>
-                            <b-form-invalid-feedback
-                              id="OrderTax-feedback"
-                            >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                          </b-form-group>
-                        </validation-provider>
-                      </b-col>
-
-                      <!-- Discount -->
-                      <b-col lg="4" md="4" sm="12" v-if="currentUserPermissions && currentUserPermissions.includes('edit_tax_discount_shipping_sale')">
-                        <validation-provider
-                          name="Discount"
-                          :rules="{ regex: /^\d*\.?\d*$/}"
-                          v-slot="validationContext"
-                        >
-                          <b-form-group :label="$t('Discount')" append="%">
-                            <b-input-group :append="currentUser.currency">
-                              <b-form-input
-                                :state="getValidationState(validationContext)"
-                                aria-describedby="Discount-feedback"
-                                label="Discount"
-                                v-model.number="sale.discount"
-                                @keyup="keyup_Discount()"
-                              ></b-form-input>
-                            </b-input-group>
-                            <b-form-invalid-feedback
-                              id="Discount-feedback"
-                            >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                          </b-form-group>
-                        </validation-provider>
-                      </b-col>
-
-                      <!-- Shipping  -->
-                      <b-col lg="4" md="4" sm="12" v-if="currentUserPermissions && currentUserPermissions.includes('edit_tax_discount_shipping_sale')">
-                        <validation-provider
-                          name="Shipping"
-                          :rules="{ regex: /^\d*\.?\d*$/}"
-                          v-slot="validationContext"
-                        >
-                          <b-form-group :label="$t('Shipping')">
-                            <b-input-group :append="currentUser.currency">
-                              <b-form-input
-                                :state="getValidationState(validationContext)"
-                                aria-describedby="Shipping-feedback"
-                                label="Shipping"
-                                v-model.number="sale.shipping"
-                                @keyup="keyup_Shipping()"
-                              ></b-form-input>
-                            </b-input-group>
-
-                            <b-form-invalid-feedback
-                              id="Shipping-feedback"
-                            >{{ validationContext.errors[0] }}</b-form-invalid-feedback>
-                          </b-form-group>
-                        </validation-provider>
-                      </b-col>
+                      
 
                       <b-col md="6" sm="12">
                         <b-button
@@ -1400,8 +1329,8 @@ export default {
         is_imei: "",
         imei_number:"",
       },
-      sound: "/audio/Beep.wav",
-      audio: new Audio("/audio/Beep.wav")
+      sound: "/audio/Beep1.wav",
+      audio: new Audio("/audio/Beep1.wav")
     };
   },
   computed: {
@@ -1532,12 +1461,6 @@ export default {
       });
       this.cardElement.mount("#card-element");
     },
-
-
-
-
-
-
 
     SetLocal(locale) {
       this.$i18n.locale = locale;
