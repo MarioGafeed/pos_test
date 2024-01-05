@@ -706,7 +706,7 @@
                 <div class="invoice_logo text-center mb-2">
                   <img :src="'/images/'+invoice_pos.setting.logo" alt width="60" height="60">
                 </div>
-                <p>
+                <p style="text-align: center;">
                   <span>{{$t('date')}} : {{invoice_pos.sale.date}} <br></span>
                   <span v-show="pos_settings.show_address">{{$t('Adress')}} : {{invoice_pos.setting.CompanyAdress}} <br></span>
                   <span v-show="pos_settings.show_email">{{$t('Email')}} : {{invoice_pos.setting.email}} <br></span>
@@ -717,17 +717,21 @@
               </div>
 
               <table class="table_data">
+                <thead >
+                  <tr style="background: #eee; ">
+                    <th style="text-align: right;" colspan="3">{{$t('product_name')}}</th>
+                    <th style="text-align: center;" colspan="1">{{$t('Quantity')}}</th>
+                    <th style="text-align: center;" colspan="1">{{$t('Price')}}</th>
+                    <th style="text-align: left;" colspan="1">{{$t('total_price')}}</th>
+                  </tr>
+                </thead>
                 <tbody>
                   <tr v-for="detail_invoice in invoice_pos.details">
-                    <td colspan="3">
-                      {{detail_invoice.name}}
-                       <br v-show="detail_invoice.is_imei && detail_invoice.imei_number !==null">
-                        <span v-show="detail_invoice.is_imei && detail_invoice.imei_number !==null ">{{$t('IMEI_SN')}} : {{detail_invoice.imei_number}}</span>
-                        <br>
-                        <span>{{formatNumber(detail_invoice.quantity,2)}} {{detail_invoice.unit_sale}} x {{formatNumber(detail_invoice.total/detail_invoice.quantity,2)}}</span>
-                    </td>
+                    <td style="text-align: right;" colspan="3">{{detail_invoice.name}}</td>
+                    <td style="text-align: center;" colspan="1">{{formatNumber(detail_invoice.quantity,2)}}</td>
+                    <td style="text-align: center;" colspan="1">{{formatNumber(detail_invoice.total/detail_invoice.quantity,2)}}</td>                  
                     <td
-                      style="text-align:right;vertical-align:bottom"
+                      style="text-align:center;vertical-align:center"
                     >{{formatNumber(detail_invoice.total,2)}}</td>
                   </tr>
 

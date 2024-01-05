@@ -920,4 +920,5 @@ export default {
     sms_body:'محتوى الرسالة القصيرة (SMS)',
     sms_templates:'قوالب الرسائل القصيرة',
     email_templates:'قوالب البريد الإلكتروني',
+    total_price:'إجمالي',    
 };
